@@ -1,20 +1,11 @@
 import React, { useState } from 'react';
-import NameAgeForm from './form/form';
-import UserList from './form/UserList';
+import LoginForm from './login/login';
 
 const App = () => {
-  const [users, setUsers] = useState([]);
-
-  const addUser = (user) => {
-    setUsers([...users, user]);
-  };
-
+  
   return (
     <div>
-      <h1>User Management</h1>
-      <NameAgeForm addUser={addUser} />
-      <UserList users={users} />
-      
+      <LoginForm />      
     </div>
   );
 };
