@@ -11,9 +11,10 @@ const App = () => {
 
   return (
     <div>
-      <h1>React User Management</h1>
+      <h1>User Management</h1>
       <NameAgeForm addUser={addUser} />
       <UserList users={users} />
+      
     </div>
   );
 };

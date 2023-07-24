@@ -3,10 +3,11 @@ import React, { useState } from 'react';
 const NameAgeForm = ({ addUser }) => {
   const [name, setName] = useState('');
   const [age, setAge] = useState('');
+  const [college, setCollege] = useState('');
   const [error, setError] = useState('');
 
   const handleAddUser = () => {
-    if (name.trim() === '' || age.trim() === '') {
+    if (name.trim() === '' || age.trim() === ''|| college.trim()==='') {
       setError('Please provide both name and age.');
       return;
     }
@@ -18,9 +19,10 @@ const NameAgeForm = ({ addUser }) => {
     }
 
     setError('');
-    addUser({ name, age: parsedAge });
+    addUser({ name, age: parsedAge, college });
     setName('');
     setAge('');
+    setCollege('');
   };
 
   return (
@@ -36,6 +38,12 @@ const NameAgeForm = ({ addUser }) => {
         placeholder="Age"
         value={age}
         onChange={(e) => setAge(e.target.value)}
+      />
+       <input
+        type="text"
+        placeholder="College"
+        value={college}
+        onChange={(e) => setCollege(e.target.value)}
       />
       <button onClick={handleAddUser}>Add User</button>
       {error && <p>{error}</p>}

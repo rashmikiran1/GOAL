@@ -4,13 +4,13 @@ const UserList = ({ users }) => {
   return (
     <div>
       <h2>User List</h2>
-      <ul>
+      <div>
         {users.map((user, index) => (
-          <li key={index}>
-            {user.name} - {user.age}
-          </li>
+          <h2 key={index}>
+            {user.name}  {user.age}  {user.college}
+          </h2>
         ))}
-      </ul>
+      </div>
     </div>
   );
 };
