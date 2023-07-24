@@ -5,9 +5,10 @@ const NameAgeForm = ({ addUser }) => {
   const [age, setAge] = useState('');
   const [college, setCollege] = useState('');
   const [error, setError] = useState('');
+  const [isFormValid, setIsFormValid] = useState(true);
 
   const handleAddUser = () => {
-    if (name.trim() === '' || age.trim() === ''|| college.trim()==='') {
+    if (name.trim() === '' || age.trim() === '') {
       setError('Please provide both name and age.');
       return;
     }
@@ -17,6 +18,11 @@ const NameAgeForm = ({ addUser }) => {
       setError('Please provide a valid age.');
       return;
     }
+    if (college.trim() === '') {
+        setError('Please provide a college name.');
+        setIsFormValid(false);
+        return;
+      }
 
     setError('');
     addUser({ name, age: parsedAge, college });
