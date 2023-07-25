@@ -1,13 +1,36 @@
 import React, { useState } from 'react';
-import LoginForm from './login/login';
 
-const App = () => {
+  import Login from './Components/login/Login';
+import Home from './Components/home/Home';
+import MainHeader from './Components/mainheader/MainHeader';
+import AuthContext from './Store/Auth-Context';
   
-  return (
-    <div>
-      <LoginForm />      
-    </div>
-  );
-};
-
-export default App;
+  function App() {
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+  
+    const loginHandler = (email, password) => {
+     
+      setIsLoggedIn(true);
+    };
+  
+    const logoutHandler = () => {
+      setIsLoggedIn(false);
+    };
+  
+    return (
+      <AuthContext.Provider
+      value={{isLoggedIn:isLoggedIn,
+              onLogout:logoutHandler        
+      }}
+      >
+        <MainHeader onLogout={logoutHandler} />
+        <main>
+          {!isLoggedIn && <Login onLogin={loginHandler} />}
+          {isLoggedIn && <Home onLogout={logoutHandler} />}
+        </main>
+      </AuthContext.Provider>
+    );
+  }
+  
+  export default App;
+  
