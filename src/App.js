@@ -1,22 +1,34 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
+import ProductForm from './Components/productForm';
+import Product from './Components/product';
+import { CartProvider } from './Components/cartContext';
+import Cart from './Components/cart';
 
-import Login from './Components/login/Login';
-import Home from './Components/home/Home';
-import MainHeader from './Components/mainheader/MainHeader';
-import AuthContext from './Store/Auth-Context';
-  
-  function App() {
-    const ctx = useContext(AuthContext)
-    return (
-    <React.Fragment>
-        <MainHeader />
-        <main>
-          {!ctx.isLoggedIn && <Login />}
-          {ctx.isLoggedIn && <Home />}
-        </main>
-      </React.Fragment>
-    );
-  }
-  
-  export default App;
-  
+const App = () => {
+  const [products, setProducts] = useState([]);
+
+  const addProduct = (product) => {
+    setProducts([...products, product]);
+  };
+
+  return (
+    <CartProvider>
+      <div>
+        <h1>Shoe Store</h1>
+        <ProductForm addProduct={addProduct} />
+        {products.map((product, index) => (
+          <Product
+            key={index}
+            shoeName={product.shoeName}
+            description={product.description}
+            price={product.price}
+            quantities={product.quantities}
+          />
+        ))}
+        
+      </div>
+    </CartProvider>
+  );
+};
+
+export default App;
