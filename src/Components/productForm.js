@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Modal from 'react-modal';
 import { useCart } from './cartContext';
+import Cart from './cart';
 
 Modal.setAppElement('#root');
 
@@ -15,7 +16,7 @@ const ProductForm = ({ addProduct }) => {
   const [isCartModalOpen, setIsCartModalOpen] = useState(false);
 
 
-  const { cartItems } = useCart();
+  const { cartItems, emptyCart } = useCart();
 
   const calculateTotalPrice = () => {
     return cartItems.reduce((total, item) => total + item.productprice,0);
@@ -84,19 +85,13 @@ const ProductForm = ({ addProduct }) => {
   
     </form>
     <button onClick={openCartModal}>Cart ({cartItems.length})</button>
-      <Modal isOpen={isCartModalOpen} onRequestClose={closeCartModal}>
-        <h2>Cart</h2>
-        {cartItems.map((item, index) => (
-          <div key={index}>
-            <p>
-              {item.size} - {item.productName} - Price: ${item.productprice}
-            </p>
-          </div>
-        ))}
-         <p>Total Price: ${calculateTotalPrice()}</p>
-        <button onClick={closeCartModal}>Close</button>
-       
-      </Modal>
+      <Cart
+        isOpen={isCartModalOpen}
+        onRequestClose={closeCartModal}
+        cartItems={cartItems}
+        calculateTotalPrice={calculateTotalPrice}
+        emptyCart={emptyCart}
+      />
       </div>
   );
 };

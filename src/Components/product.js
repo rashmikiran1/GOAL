@@ -5,28 +5,28 @@ const Product = ({ shoeName, description, price, quantities }) => {
   const { addToCart } = useCart();
 
   const handleAddToCart = (size) => {
+    
     if (quantities[size] > 0) {
-      addToCart(size, shoeName, price);
+      addToCart(size, shoeName, price) ;
       quantities[size] -= 1;
     }
   };
 
   return (
     <div>
-      <h3>{shoeName}</h3>
-      <p>{description}</p>
-      <p>Price: ${price}</p>
+        <div style={{display:'flex', justifySelf:'baseline'}}>
+      <div>&nbsp;&nbsp;&nbsp;{shoeName}</div>
+      <div>&nbsp;&nbsp;&nbsp;{description}</div>
+      <div>&nbsp;&nbsp;&nbsp;Price: ${price}</div>
       <div>
-        <p>Small Quantity: {quantities.small}</p>
-        <button onClick={() => handleAddToCart('small')}>Buy Small</button>
+        <button onClick={() => handleAddToCart('small')}>Buy S {quantities.small}</button>
       </div>
       <div>
-        <p>Medium Quantity: {quantities.medium}</p>
-        <button onClick={() => handleAddToCart('medium')}>Buy Medium</button>
+        <button onClick={() => handleAddToCart('medium')}>Buy M {quantities.medium}</button>
       </div>
       <div>
-        <p>Large Quantity: {quantities.large}</p>
-        <button onClick={() => handleAddToCart('large')}>Buy Large</button>
+        <button onClick={() => handleAddToCart('large')}>Buy L {quantities.large}</button>
+      </div>
       </div>
     </div>
   );
